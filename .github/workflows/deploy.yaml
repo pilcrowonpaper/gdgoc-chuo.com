@@ -1,0 +1,28 @@
+name: "Deploy"
+on: [push]
+
+env:
+  CLOUDFLARE_API_TOKEN: ${{secrets.CLOUDFLARE_API_TOKEN}}
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    if: github.repository == 'pilcrowonpaper/gdgoc-chuo.com' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Install PNPM
+        run: npm i -g pnpm
+      - name: Install wrangler
+        run: npm i -g wrangler
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm build
+      - name: Deploy
+        run: wrangler deploy
