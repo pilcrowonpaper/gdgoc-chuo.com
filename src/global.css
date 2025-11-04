@@ -1,0 +1,45 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	border: none;
+	appearance: none;
+}
+
+html {
+	font-family: "SF Mono", "Operator Mono", "Roboto Mono", "Menlo", "Monaco", "Consolas", monospace;
+	font-size: 1rem;
+	--accent-color: #cf0100;
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		--accent-color: #ff8181;
+		background-color: #0e0e0e;
+		color: #eaeaea;
+	}
+}
+
+.md h1 {
+	margin-bottom: 2rem;
+	font-size: 2.5rem;
+}
+
+.md h2 {
+	margin-bottom: 1.5rem;
+	font-size: 2rem;
+}
+
+.md p {
+	margin-bottom: 2rem;
+}
+
+.md ul {
+	margin-bottom: 2rem;
+	list-style-position: inside;
+}
+
+.md a {
+	color: var(--accent-color);
+	text-decoration: underline;
+}

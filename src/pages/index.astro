@@ -1,5 +1,8 @@
 ---
+// biome-ignore lint/correctness/noUnusedImports: broken in Astro files
+import About from "@src/about.md";
 
+import "@src/global.css";
 ---
 
 <html lang="en">
@@ -13,7 +16,26 @@
         />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        
         <title>GDGoC Chuo University</title>
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="GDGoC Chuo University" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en" />
+        <meta property="og:site_name" content="GDGoC Chuo University" />
+        <meta property="og:url" content="https://gdgoc-chuo.com" />
+        <meta
+            property="og:image"
+            content="https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_256,q_auto:good,w_256/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_Favicon_y29LtMy.png"
+        />
+
+        <!-- Twitter tags -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="GDGoC Chuo University" />
+
+        <!-- Discord -->
+        <meta name="theme-color" content="#cf0100" />
     </head>
     <body>
         <div id="card">
@@ -49,35 +71,8 @@
             </div>
         </div>
         <div id="about">
-            <div style="max-width: 60rem; margin: auto;">
-                <h1>GDGoC Chuo University</h1>
-                <p>
-                    <a href="">Google Developer Groups on Campus（GDG on Campus）</a>
-                    は、Google Developers
-                    のサポートを受けて運営される、大学単位の技術系学生コミュニティです。110か国以上、1200以上の拠点があります。このコミュニティは、テクノロジーに興味を持つ人のためのコミュニティです。
-                </p>
-                <p>
-                    その中でも GDGoC Chuo University
-                    は、中央大学を拠点に活動するコミュニティとして、「テクノロジーの力で身近な課題を解決する」「技術力を向上させる」ことを目指しています。GDGoC
-                    Chuo University は、次の3つの部門から構成されています：
-                </p>
-                <ul>
-                    <li>
-                        Technology部門：技術を活用して課題解決に取り組み、メンバーのスキル向上を目指す。
-                    </li>
-                    <li>
-                        Event部門：イベントの企画・運営を通して、コミュニティを盛り上げ、つながりを深める。
-                    </li>
-                    <li>
-                        Marketing部門：活動内容を発信し、GDGs
-                        Chuoの魅力を広めていく。
-                    </li>
-                </ul>
-                <p>現在は中央大学市ヶ谷田町キャンパス、後楽園キャンパス、茗荷谷キャンパスで活動しています。</p>
-                <h2>プロジェクト</h2>
-                <ul>
-                    <li>Chuinfo: 日々レポートに追われる中央大生のために、大学Webサービスと連携する様々な便利な機能がついたアプリ。(<a href="https://apps.apple.com/jp/app/chuinfo-中央大生向け非公式アプリ/id6670358906">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.myml_12.chuinfo&pli=1">Android</a>)</li>
-                </ul>
+            <div style="max-width: 60rem; margin: auto;" class="md">
+                <About />
             </div>
         </div>
     </body>
@@ -418,29 +413,6 @@
 </script>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        art-decoration: none;
-        border: none;
-        appearance: none;
-    }
-
-    html {
-        font-family: "SF Mono", "Operator Mono", "Roboto Mono", "Menlo",
-            "Monaco", "Consolas", monospace;
-        font-size: 1rem;
-        --accent-color: #cf0100;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        html {
-            --accent-color: #ff8181;
-            background-color: #0e0e0e;
-            color: #eaeaea;
-        }
-    }
-
     #card {
         width: 100%;
         height: 100vh;
@@ -452,6 +424,7 @@
 
     #art {
         font-size: min(calc(100vw / 200 * 1.5), calc(80vh / 60), 0.7rem);
+        line-height: 1;
         color: var(--accent-color);
         user-select: none;
     }
@@ -464,7 +437,7 @@
 
     .link {
         color: var(--accent-color);
-        art-decoration: underline;
+        text-decoration: underline;
         cursor: pointer;
     }
 
@@ -494,28 +467,5 @@
         #about {
             padding: 2rem 1rem;
         }
-    }
-
-    #about h1 {
-        margin-bottom: 2rem;
-        font-size: 2.5rem;
-    }
-
-     #about h2 {
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-    }
-
-    #about p {
-        margin-bottom: 2rem;
-    }
-
-    #about ul {
-        margin-bottom: 2rem;
-        list-style-position: inside;
-    }
-
-    #about a {
-        color: var(--accent-color);;
     }
 </style>
