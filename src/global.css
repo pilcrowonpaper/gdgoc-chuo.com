@@ -43,3 +43,7 @@ html {
 	color: var(--accent-color);
 	text-decoration: underline;
 }
+
+.md li {
+	margin: 0.5rem 0;
+}
