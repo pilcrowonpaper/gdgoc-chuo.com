@@ -3,7 +3,7 @@
 ```
 pnpm dev
 
-pnpm format
+pnpm check
 
 pnpm build
 ```
