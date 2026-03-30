@@ -1,0 +1,11 @@
+.post-description {
+	color: #717171;
+	font-style: italic;
+	margin-bottom: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+	.post-description {
+		color: #888888;
+	}
+}

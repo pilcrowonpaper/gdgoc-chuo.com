@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@src/layouts/base.astro";
+import "@src/text.css";
+
+interface Props {
+	title: string;
+}
+---
+
+<BaseLayout title={Astro.props.title}>
+    <header style="padding: 1.5rem 0;">
+        <a
+            style="max-width: 50rem; margin: auto; color: inherit; display: block; color: var(--accent-color);"
+            href="/"
+        >
+            <span aria-hidden="true">&lt;&gt; </span>GDGoC Chuo University
+        </a>
+    </header>
+    <main class="text" style="padding-top: 1rem;">
+        <slot />
+    </main>
+</BaseLayout>
+
+<style>
+    html {
+        padding: 0rem 2rem;
+        box-sizing: border-box;
+        padding-bottom: 4rem;
+        min-height: 100vh;
+    }
+
+    @media (max-width: 40rem) {
+        html {
+            padding: 0rem 1rem;
+        }
+    }
+
+    main {
+        margin: auto;
+        max-width: 50rem;
+    }
+</style>

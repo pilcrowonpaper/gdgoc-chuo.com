@@ -1,0 +1,33 @@
+---
+import "@src/blog.css";
+import * as assets from "astro:assets";
+import image1 from "@src/images/blog-2-1.png";
+import image2 from "@src/images/blog-2-2.png";
+import CompactLayout from "@src/layouts/compact.astro";
+---
+
+<CompactLayout title="2025年度大学祭">
+    <h1>2025年度大学祭</h1>
+    <p>GDGs Chuo で体験企画「レトロゲーム魔改造！」を出展しました！</p>
+    <ul>
+        <li>2025年11月1日（土）＠市ヶ谷田町キャンパス</li>
+        <li>2025年11月2日（日）＠茗荷谷キャンパス</li>
+    </ul>
+    <assets.Image src={image1} alt="恐竜がジャンプしてサボテンを避けるゲームの画面" />
+    <p>
+        昨年度に続く開催となりましたが、多くの方にお越しいただき、両日とも大変な盛り上がりとなりました。当日はサークル員がサポートしながら、サークル自作のゲーム開発ソフト
+        <a href="https://lav.gdgoc-chuo.com">LAV （ラボ）</a
+        >を使って、参加者のみなさまにゲームをアレンジする体験をしていただきました。また、小さなお子さま向けにはドット絵づくりや簡単な音楽制作など、ものづくりの楽しさに触れていただけるコンテンツも用意しました。
+    </p>
+    <assets.Image src={image2} alt="ドット絵制作画面" />
+    <p>
+        ２日間合計で136名が参加しました。プログラミング未経験の方がほとんどでしたが、
+    </p>
+    <ul>
+        <li>「技術が身近に感じられた」</li>
+        <li>「また学んでみたい」</li>
+    </ul>
+    <p>
+        といった声も多く、来場者の方に良い体験を提供できたのではないかと思います。
+    </p>
+</CompactLayout>

@@ -13,5 +13,8 @@
 		"@astrojs/cloudflare": "^12.6.10",
 		"@biomejs/biome": "^2.3.3",
 		"astro": "^5.15.1"
+	},
+	"devDependencies": {
+		"@types/node": "^24.10.1"
 	}
 }

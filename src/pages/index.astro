@@ -1,82 +1,78 @@
 ---
-// biome-ignore lint/correctness/noUnusedImports: broken in Astro files
-import About from "@src/about.md";
-
-import "@src/global.css";
+import "@src/text.css";
+import BaseLayout from "@src/layouts/base.astro";
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link
-            rel="icon"
-            type="image/png"
-            href="https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_32,q_auto:good,w_32/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_Favicon_y29LtMy.png"
-            sizes="32x32"
-        />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        
-        <title>GDGoC Chuo University</title>
-
-        <!-- OpenGraph tags -->
-        <meta property="og:title" content="GDGoC Chuo University" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en" />
-        <meta property="og:site_name" content="GDGoC Chuo University" />
-        <meta property="og:url" content="https://gdgoc-chuo.com" />
-        <meta
-            property="og:image"
-            content="https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_256,q_auto:good,w_256/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_Favicon_y29LtMy.png"
-        />
-
-        <!-- Twitter tags -->
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="GDGoC Chuo University" />
-
-        <!-- Discord -->
-        <meta name="theme-color" content="#cf0100" />
-    </head>
-    <body>
-        <div id="card">
-            <div style="width: fit-content;">
-                <pre id="art" aria-hidden="true"></pre>
-                <noscript>Enable JavaScript.</noscript>
-            </div>
-            <div
-                style="font-weight: normal; font-size: 1rem; position: absolute; bottom: 0; left: 0;width: 100%;"
-            >
-                <div id="card-header">
-                    <p>
-                        <span aria-hidden="true">&lt;&gt;</span> Google Developer
-                        Group on Campus @ <span
-                            style="color: var(--accent-color)"
-                            >Chuo University</span
-                        >
-                    </p>
-                    <ul style="list-style: none; display: flex; gap: 2rem;">
-                        <li>
-                            <a href="https://x.com/gdgs_chuo" class="link"
-                                >Twitter/X</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="https://www.instagram.com/gdgs_chuo"
-                                class="link">Instagram</a
-                            >
-                        </li>
-                    </ul>
-                </div>
+<BaseLayout title="GDGoC Chuo University">
+    <div id="card">
+        <div style="width: fit-content;">
+            <pre
+                id="art"
+                aria-hidden="true"
+                style="user-select: none; -webkit-user-select: none; cursor: default;">
+            </pre>
+            <noscript>Enable JavaScript.</noscript>
+        </div>
+        <div
+            style="font-weight: normal; font-size: 1rem; position: absolute; bottom: 0; left: 0;width: 100%;"
+        >
+            <div id="card-header">
+                <p style="color: var(--accent-color)">
+                    <span aria-hidden="true">&lt;&gt;</span> GDGoC Chuo University
+                </p>
             </div>
         </div>
-        <div id="about">
-            <div style="max-width: 60rem; margin: auto;" class="md">
-                <About />
-            </div>
+    </div>
+    <div id="about">
+        <div style="max-width: 50rem; margin: auto;" class="text">
+            <h1>Google Developer Groups on Campus Chuo University</h1>
+            <p>
+                <a href="https://gdg.community.dev/"
+                    >Google Developer Groups on Campus（GDGoC）</a
+                > は、Google Developers のサポートを受けて運営される、大学単位の技術系学生コミュニティです。110
+                か国以上、1200 以上の拠点があります。このコミュニティは、テクノロジーに興味を持つ人のためのコミュニティです。
+            </p>
+            <p>
+                その中でも GDGoC Chuo University
+                は、中央大学を拠点に活動するコミュニティとして、「テクノロジーの力で身近な課題を解決する」「技術力を向上させる」ことを目指しています。GDGoC
+                Chuo University は、次の３つの部門から構成されています：
+            </p>
+            <ul>
+                <li>
+                    Technology
+                    部門：技術を活用して課題解決に取り組み、メンバーのスキル向上を目指す。
+                </li>
+                <li>
+                    Event
+                    部門：イベントの企画・運営を通して、コミュニティを盛り上げ、つながりを深める。
+                </li>
+                <li>
+                    Marketing 部門：活動内容を発信し、GDGoC Chuo University
+                    の魅力を広めていく。
+                </li>
+            </ul>
+            <p>
+                現在は中央大学市ヶ谷田町キャンパス、後楽園キャンパス、茗荷谷キャンパスで活動しています。
+            </p>
+            <ul>
+                <li>
+                    プロジェクト紹介：<a href="/projects"
+                        >gdgoc-chuo.com/projects</a>
+                </li>
+                <li>ブログ：<a href="/blog">gdgoc-chuo.com/blog</a></li>
+                <li>
+                    X/Twitter：<a href="https://x.com/gdgs_chuo" target="_blank"
+                        >x.com/gdgs_chuo</a>
+                </li>
+                <li>
+                    Instagram：<a
+                        href="https://www.instagram.com/gdgs_chuo"
+                        target="_blank">instagram.com/gdgs_chuo</a>
+                </li>
+            </ul>
         </div>
-    </body>
-</html>
+    </div>
+</BaseLayout>
 
 <script>
     import art from "@src/art?raw";
@@ -116,10 +112,6 @@ import "@src/global.css";
         }
         let timePassed = 0;
         while (currentState !== art) {
-            // if (timePassed > 5000) {
-            //     artElement.innerText = art;
-            //     break;
-            // }
             let nextState = "";
             for (let i = 0; i < art.length; i++) {
                 if (currentState[i] !== art[i]) {
@@ -128,7 +120,7 @@ import "@src/global.css";
                             nextState +=
                                 uniqueChars[
                                     Math.floor(
-                                        Math.random() * uniqueChars.length
+                                        Math.random() * uniqueChars.length,
                                     )
                                 ];
                         } else {
@@ -141,7 +133,7 @@ import "@src/global.css";
                             nextState +=
                                 uniqueChars[
                                     Math.floor(
-                                        Math.random() * uniqueChars.length
+                                        Math.random() * uniqueChars.length,
                                     )
                                 ];
                         }
@@ -378,7 +370,7 @@ import "@src/global.css";
                             nextState +=
                                 uniqueChars[
                                     Math.floor(
-                                        Math.random() * uniqueChars.length
+                                        Math.random() * uniqueChars.length,
                                     )
                                 ];
                         } else {
@@ -391,7 +383,7 @@ import "@src/global.css";
                             nextState +=
                                 uniqueChars[
                                     Math.floor(
-                                        Math.random() * uniqueChars.length
+                                        Math.random() * uniqueChars.length,
                                     )
                                 ];
                         }
@@ -448,7 +440,7 @@ import "@src/global.css";
         justify-content: space-between;
     }
 
-    @media (max-width: 60rem) {
+    @media (max-width: 40rem) {
         #card-header {
             padding: 1rem;
             flex-direction: column;
@@ -461,9 +453,10 @@ import "@src/global.css";
     #about {
         padding: 4rem 2rem;
         min-height: 100vh;
+        box-sizing: border-box;
     }
 
-    @media (max-width: 60rem) {
+    @media (max-width: 40rem) {
         #about {
             padding: 2rem 1rem;
         }

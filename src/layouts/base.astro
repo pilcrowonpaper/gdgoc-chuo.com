@@ -1,0 +1,96 @@
+---
+interface Props {
+	title: string;
+}
+---
+
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_32,q_auto:good,w_32/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_Favicon_y29LtMy.png"
+            sizes="32x32"
+        />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+
+        <title>GDGoC Chuo University</title>
+
+        <!-- OpenGraph tags -->
+        <meta property="og:title" content="GDGoC Chuo University" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en" />
+        <meta property="og:site_name" content="GDGoC Chuo University" />
+        <meta property="og:url" content="https://gdgoc-chuo.com" />
+        <meta
+            property="og:image"
+            content="https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_256,q_auto:good,w_256/v1/gcs/platform-data-goog/contentbuilder/GDG_Bevy_Favicon_y29LtMy.png"
+        />
+
+        <!-- Twitter tags -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="GDGoC Chuo University" />
+
+        <meta
+            name="theme-color"
+            content="#cf0100"
+            media="(prefers-color-scheme: light)"
+        />
+        <meta
+            name="theme-color"
+            content="#ff8181"
+            media="(prefers-color-scheme: dark)"
+        />
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>
+
+<style is:global>
+    * {
+        margin: 0;
+        padding: 0;
+        font-size: inherit;
+        font-weight: normal;
+        color: inherit;
+        background: none;
+        border: none;
+        background-color: transparent;
+        appearance: none;
+        box-sizing: border-box;
+        text-decoration: none;
+    }
+
+    html {
+        font-family:
+            "SF Mono", "Operator Mono", "Roboto Mono", "Menlo", "Monaco",
+            "Consolas", monospace;
+        font-size: 1rem;
+        --accent-color: #cf0100;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        html {
+            --accent-color: #ff8181;
+            background-color: #0e0e0e;
+            color: #eaeaea;
+        }
+    }
+
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+        display: block;
+        max-width: 100%;
+    }
+
+    ul,
+    ol {
+        list-style: none;
+    }
+</style>

@@ -1,0 +1,63 @@
+---
+import "@src/blog.css";
+import * as assets from "astro:assets";
+import image1 from "@src/images/blog-1-1.jpeg";
+import CompactLayout from "@src/layouts/compact.astro";
+
+const code = `async function render(current: string) {
+    const next = update(current); // 次のフレームを計算
+    element.innerText = updated;
+
+    if (next === target) {
+        // 完成
+        return
+    }
+    await sleep(10);
+    await render(updated);
+}`;
+---
+
+<CompactLayout title="公式サイトを作りました！">
+    <h1>公式サイトを作りました！</h1>
+    <p>
+        GDGoC Chuo University
+        の公式サイトを作りました！サイト自体は去年の11月頃からありましたがやっとブログを追加しました。すでに記事が4つ公開されています。
+    </p>
+    <p>
+        GDGoC Chuo University
+        はウェブやモバイルアプリの開発を中心に活動している中央大学のサークルです。このサイトではメンバーが書いたブログ記事の公開とプロジェクトの紹介を行っています。
+    </p>
+    <p>
+        ウェブ開発に触れるサークルは公式サイトを作りべきだと思ってます。ただ実際公式サイトがあるサークルが意外と少なかったのでこれからもっと増えていってほしいです。
+    </p>
+    <p>
+        このサイトは <a href="https://astro.build">Astro</a> で作った静的サイトです。昔から Astro を使っていますが、やっぱり使いやすい。生成された
+        HTML は <a href="https://workers.cloudflare.com">Cloudflare Workers</a> で Static Assets としてデプロイしています。
+    </p>
+    <p>
+        僕はバックエンドをメインにやってるのでそんなに CSS
+        とかアニメーションを使いたいと思わないのですが、かっこいい「何か」が欲しかったのででっかい
+        「GDGoC Chuo」の ASCII
+        アートとアニメーションを加えました。（実はアニメーションのパターンが複数あります！）
+    </p>
+    <assets.Image
+        src={image1}
+        alt="ASCII アートのもととなった3Dレンダー"
+    />
+    <p>アニメーションは DOM とテキストだけでやっています。</p>
+    <p>
+        まず Blender でいい感じの 3D テキストを作って、怪しいサイトで画像を
+        ASCII アートに変換しました。あとは初期値の無の文字列を ASCII
+        アートの文字列になるまで文字を変えていくだけです。
+    </p>
+    <pre><code>{code}</code></pre><p>
+        これでも悪くないパフォーマンスなのでブラウザーと JavaScript
+        ってすごい。HTML と CSS
+        使っているだけなので簡単にレスポンシブなデザインにできました。<code
+            >calc()</code
+        > などを使ってページの大きさに合わせてフォントサイズを設定しています。
+    </p>
+    <pre><code>font-size: min(calc(100vw / 200 * 1.5), calc(80vh / 60), 0.7rem);
+</code></pre>
+    <p>これからもブログ記事を増やす予定なのでよろしくお願いします。</p>
+</CompactLayout>

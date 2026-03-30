@@ -1,0 +1,209 @@
+.text h1 {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 2rem;
+}
+
+.text h2 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-top: 2.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.text h3 {
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin-top: 2rem;
+	margin-bottom: 1.5rem;
+}
+
+.text h4 {
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.text p {
+	line-height: 1.5;
+	margin-bottom: 1.5rem;
+}
+
+.text pre {
+	background-color: #f4f4f4;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	overflow: auto;
+	tab-size: 4;
+}
+
+@media (prefers-color-scheme: dark) {
+	.text pre {
+		background-color: #1c1c1c;
+	}
+}
+
+.text p a,
+.text ul a,
+.text ol a,
+.text table a,
+.text blockquote a {
+	color: var(--accent-color);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.text p strong,
+.text ul strong,
+.text ol strong,
+.text table strong {
+	font-weight: 600;
+}
+
+.text p em,
+.text ul em,
+.text ol em,
+.text table em {
+	font-style: italic;
+}
+
+.text ul,
+.text ol {
+	line-height: 1.5;
+	margin-bottom: 1.5rem;
+}
+
+.text ul li {
+	list-style: disc inside;
+	margin-bottom: 0.2rem;
+}
+
+.text ol li {
+	list-style: decimal inside;
+	margin-bottom: 0.2rem;
+}
+
+.text li:last-child {
+	margin-bottom: 0;
+}
+
+.text code {
+	font-family: monospace;
+}
+
+.text blockquote {
+	background-color: #f4f4f4;
+	color: #3c3c3c;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.text blockquote > *:last-child {
+	margin-bottom: 0;
+}
+
+.text blockquote > footer {
+	font-size: 0.85rem;
+	font-style: italic;
+}
+
+.text .table-wrapper {
+	width: 100%;
+	overflow: auto;
+	padding-bottom: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.text table {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+	white-space: nowrap;
+}
+
+.text table caption {
+	font-size: 0.85rem;
+	margin-top: 0.5rem;
+	text-align: left;
+	font-style: italic;
+	caption-side: bottom;
+	width: 0;
+	min-width: 100%;
+	white-space: normal;
+	color: #3c3c3c;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+.text thead {
+	background-color: #f4f4f4;
+}
+
+.text thead th {
+	padding: 0.5rem 0.5rem;
+	font-size: 0.85rem;
+}
+
+.text thead th:first-child {
+	padding-left: 1rem;
+}
+
+.text thead th:last-child {
+	padding-right: 1rem;
+}
+
+.text tbody tr {
+	border-bottom: solid 1px #cccccc;
+}
+
+.text tbody tr:last-child {
+	border-bottom: none;
+}
+
+.text tbody td {
+	padding: 0.85rem 0.5rem;
+}
+
+.text tbody td:first-child {
+	padding-left: 1rem;
+}
+
+.text tbody td:last-child {
+	padding-right: 1rem;
+}
+
+.text img {
+	max-height: 50vh;
+	width: auto;
+	object-fit: contain;
+	margin: 0 auto 1.5rem;
+	background-color: #eeeeee;
+}
+
+@media (prefers-color-scheme: dark) {
+	.text img {
+		background-color: rgb(62, 62, 62);
+	}
+}
+
+.text figure > img {
+	margin: auto;
+	margin-bottom: 0.5rem;
+}
+
+.text figure {
+	margin-bottom: 1.5rem;
+}
+
+.text figcaption {
+	font-size: 0.85rem;
+	color: #888888;
+	font-style: italic;
+}
+
+.text figcaption a {
+	text-decoration: underline;
+	text-decoration-color: inherit;
+	cursor: pointer;
+}

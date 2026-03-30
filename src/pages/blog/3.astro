@@ -1,0 +1,247 @@
+---
+import "@src/blog.css";
+import * as assets from "astro:assets";
+import image1 from "@src/images/blog-3-1.png";
+import image2 from "@src/images/blog-3-2.jpeg";
+import CompactLayout from "@src/layouts/compact.astro";
+
+const code1 = `foo を 1 とする
+foo に 1 をプラスして foo の値にする`;
+
+const code2 = `set foo, 1
+set foo, $foo + 1`;
+
+const code3 = `set foo, []
+add foo, 1
+# 数学の意味と違うので > ではなく >>
+if @size($foo) >> 0:
+    do @log($foo[0])`;
+
+const code4 = `set message, {content: "hello"}
+set messages, [message]
+set messages[0].content, "bye"`;
+
+const code5 = `do @log($message)`;
+
+const code6 = `if a > 0, b > 0:
+    # a と b は0より大きい`;
+
+const code7 = `if @and(@or(a > 0, b > 0), c > 0):
+    # a また b は0より大きく、c は0より大きい`;
+
+const code8 = `for i, 0, 3:
+    do @log($i)
+
+set i = 0
+while i << 3:
+    do @log($i)
+    set i, i + 1`;
+
+const code9 = `# is_prime
+
+if $arg.num < 2:
+    return false
+
+for i, 2, @sqrt($arg.num) + 1:
+    if $arg.num % $i === 0:
+        return false
+
+return true`;
+
+const code10 = `# 0.03 ピッタリ
+# 0.30000000000000004 にはならない
+set sum, 0.1 + 0.2
+
+## エラー
+set num, 0.0000001`;
+
+const code11 = `if $lang == "japanese":
+    set message, "こんにちは"
+else:
+    set message, "Hello"
+
+do @log($message)`;
+
+const code12 = `if condition:
+    # condition satisfied`;
+
+const code13 = `# _update
+
+# タイトル画面
+if $arg.state == "idle":
+    do @fill_background(true, true, 60)
+
+    # jump game を表示
+	do @fill_character("j", true, 2, 72, 96, false, false)
+	do @fill_character("u", true, 2, 88, 96, false, false)
+	do @fill_character("m", true, 2, 104, 96, false, false)
+	do @fill_character("p", true, 2, 120, 96, false, false)
+	do @fill_character("g", true, 2, 72, 80, false, false)
+	do @fill_character("a", true, 2, 88, 80, false, false)
+	do @fill_character("m", true, 2, 104, 80, false, false)
+	do @fill_character("e", true, 2, 120, 80, false, false)`;
+---
+
+<CompactLayout title="初心者向けプログラミング言語 Puffin を作った">
+    <h1>初心者向けプログラミング言語 Puffin を作った</h1>
+    <p>
+        2025年11月1日、2日に中央大学の文化祭でゲーム開発体験を行いました。プログラミングやドット絵制作、効果音づくりなど、ゲーム開発のさまざまな工程を体験でき、最後に作ったゲームを遊べました。
+    </p>
+    <p>
+        この記事ではゲームのプログラミングに使った自作言語 Puffin
+        について話します。
+    </p>
+    <h2>自作言語を作ることになった</h2>
+    <p>ゲームのプログラミングをどうやってやるか。</p>
+    <p>
+        初心者向けのプログラミングというとやっぱり一番最初に出てくるのが <a
+            href="https://scratch.mit.edu">Scratch</a
+        >。ドラッグアンドドロップでレゴのブロックを繋げていくようにプログラミングしてゲームを作るサイトです。このブロック系の
+        UI を使ったプログラミングが１つの案でした。
+    </p>
+    <assets.Image src={image1} alt="Scratch" />
+    <p>
+        そしてもう１つの案として簡単なプログラミング言語を使って本格的なコードを書くというものもありました。この場合、自作言語を使うことになります。JavaScript
+        をそのまま使うのが一番楽ですが初心者に JavaScript
+        を読ませる、書かせるのは難しいと判断しました。 <code>eval()</code> や <code
+            >Function()</code
+        > を使うことに対する抵抗感もあったり。
+    </p>
+    <p>結果的に自作言語を作ることにしました。</p>
+    <ul>
+        <li>
+            <em>初心者用に作った言語であれば</em
+            >ブロック系のものと読みやすさはほとんど変わらない。
+        </li>
+        <li>
+            参加者はコードを少し書くだけでプログラミングを一番するのはサークルの人たち。経験者にとってはコードの方が圧倒的に使いやすい。
+        </li>
+        <li>入力値と出力値のある関数をブロックで表現できない、難しい。</li>
+        <li>
+            オブジェクト・辞書や配列・リストの扱いがブロック系のものだとイマイチ。
+        </li>
+    </ul>
+    <p>...というのが表向きの理由ですが、</p>
+    <ol>
+        <li>複雑な UI を作りたくない。</li>
+        <li>
+            <a href="https://developers.google.com/blockly">Blockly</a> などのライブラリ・フレームワークを使ったコードベースを管理したくない。
+        </li>
+        <li>独自言語の構文考えたい。</li>
+    </ol>
+    <p>
+        と自分勝手な気持ちもありました。趣味やサークル活動でプログラミングするときは基本的に楽しい方を選ぶべきだと思っていて、ここでは圧倒的に自分たちで言語作る方が楽しそうでした。
+    </p>
+    <p>
+        コンパイラのことなど何も知らずに作ったので実装について話してもあまり役立つことはないと思います。ただ、仕組みとしてはコードから AST
+        のようなもの生成し、深いノード順に実行していくだけです。JavaScript
+        に変換して <code>eval()</code> で実行する手もありましたが、パフォーマンスのことはそんなに気にしてなかったので簡単な方を選びました。
+    </p>
+    <h2>言語のデザイン</h2>
+    <p>
+        まず、初心者用の言語を調べると&quot;自然な文章&quot;を使うものをよく見ますが、構文を日本語や英語の文章に近づける必要はないと最初から決めてました。
+    </p>
+    <pre><code>{code1}</code></pre><p>と</p>
+    <pre><code>{code2}</code></pre><p>
+        を比べると、初心者でも後者の方が読みやすいかと思います。ただ、数学で一般的な記号を本来とは違う意味で使うのは避けました。例えば、<code
+            >=</code
+        > は数学では「等しい」ことを表すので、値の代入に使いませんし値を比べるときにも使いません。
+        「１行＝１指示」を言語のアイディアとしています。全ての指示が <code
+            >set</code
+        >, <code>add</code>, <code>if</code> など１つの英単語から始まり１行で完結します。ちょっとアセンブリ言語に近いかも？
+    </p>
+    <pre><code>{code3}</code></pre>
+    <p>
+        変数を参照する場合は <code>$</code>、関数を参照する場合は <code>@</code> を使います。この方が構文解析がやりやすいのと、<code
+            >true</code
+        > など使ってはいけない変数名が出てきません。変数名と関数名が被ることもないです。
+    </p>
+    <p>
+        <code>set</code> はオブジェクトにプロパティを追加やオブジェクトのプロパティの値の代入、配列の要素の値の代入にも使えます。
+    </p>
+    <pre><code>{code4}</code></pre><p>
+        全ての行が指示の名前から始まるので戻り値を無視してただ関数を読み出す場合は
+        <code>do</code> 指示を使います。
+    </p>
+    <pre><code>{code5}</code></pre><p>
+        <code>&amp;&amp;</code> と <code>||</code> は読みづらいし、<code
+            >A &amp;&amp; B</code
+        > や <code>A || B</code> は <code>A + B</code> と異なり <code>B</code> が実行されないことがあるのがわかりづらいと思ったので消しました。その代わりに
+        <code>if</code> と <code>while</code> に複数条件を定義でき、条件が全て満たされた場合に中身が実行されます。<code
+            >||</code
+        > より <code>&amp;&amp;</code> を優先したデザインですが、簡単なプログラミングの場合
+        <code>&amp;&amp;</code> を使う場面の方が圧倒的に多いと勝手に判断しました。
+    </p>
+    <pre><code>{code6}</code></pre><p>
+        <code>@and()</code> と <code>@or()</code> 関数があるので一応複雑な条件も表現できます。
+    </p>
+    <pre><code>{code7}</code></pre><p>
+        <code>for</code> 文は C のような <code>i = 0; i &lt; 10; i++;</code> ではなく、Go
+        や Python の for/range ぽい文法にしました。<code>while</code> もあります。
+    </p>
+    <pre><code>{code8}</code></pre><p>
+        関数はありますが基本的に上から下に読めるコードにしたかったので関数は定義できません。実行前に
+        JavaScript
+        で関数を登録します。ただ、プログラムに引数を渡したり、実行したプログラムが値を
+        <code>return</code> できるので、別のプログラムを実行する関数を用意すれば、似たようなことはできます。実際
+        ゲーム制作のソフトでは同じプロジェクトにある他のプログラムを実行できる <code
+            >@call()</code
+        > 関数がありました。
+    </p>
+    <pre><code>{code9}</code></pre><p>
+        変数や浮動小数点型もありません。数字は全部 decimal 型で、0.01
+        まで表現できます。これも初心者向けの言語で複雑の計算もしなければビット演算もしないのでわかりやすいものを選びました。
+    </p>
+    <pre><code>{code10}</code></pre><p>
+        ローカル変数はありません。変数は全てグローバルです。ローカル変数の実装をしたくなかったこともあるのですが、<code
+            >set name, value</code
+        > で変数を定義するこの言語ではローカルとかスコープの概念がない方が自然に感じました。ローカル変数がないのも関数を定義できないようにした理由です。
+    </p>
+    <pre><code>{code11}</code></pre><p>
+        <code>if</code> や <code>for</code> では <code>{}</code> ではなく Python みたいにインデントを使います。正直ここが唯ー後悔してる点です。
+    </p>
+    <pre><code>{code12}</code></pre><p>
+        こうやってインデントを使う言語は個人的に嫌いですが「１行 ＝
+        １指示」の言語では意外と自然と感じたので選びました。ただ、実際これを未経験者に説明にするのは難しく、C
+        系の言語みたいに <code>{}</code> 使った方がわかりやすかったと思ってます。
+    </p>
+    <h2>ゲーム開発</h2>
+    <p>
+        開発したゲーム開発ソフト LAV では初期状態を設定する `_init`
+        プログラムと1秒間に100回実行される `_update` プログラムを使いました。
+    </p>
+    <pre><code>{code13}</code></pre><p></p>
+    <h2>最後に</h2>
+    <p>
+        ソースコードは <a
+            href="https://github.com/pilcrowonpaper/lav/tree/main/puffin"
+            >GitHub</a
+        > で公開してあります。<a
+            href="https://github.com/pilcrowonpaper/lav/blob/main/documentation/puffin.md"
+            >英語版マニュアル</a
+        >と<a
+            href="https://github.com/pilcrowonpaper/lav/blob/main/documentation/puffin-jp.md"
+            >日本語版マニュアル</a
+        >もレポジトリーに置いてあります。
+    </p>
+    <p>
+        Puffin
+        はツノメドリという可愛い鳥の英語名ですが、この名前に意味は特になくて The
+        Puffin language の響きが好きだったので選びました。
+    </p>
+    <figure>
+        <assets.Image src={image2} alt="ツノメドリ" />
+        <figcaption>
+            "<a
+                href="https://commons.wikimedia.org/wiki/File:Puffin_Latrabjarg_Iceland.jpg"
+                target="_blank"
+                >Puffin (Fratercula arctica) at Látrabjarg, Iceland.</a
+            >" by Henrik Thorburn, licensed under
+            <a
+                href="https://creativecommons.org/licenses/by/3.0/"
+                target="_blank"
+                rel="license noopener noreferrer">CC BY 3.0</a
+            >.
+        </figcaption>
+    </figure>
+</CompactLayout>
