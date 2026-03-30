@@ -4,7 +4,7 @@ import * as assets from "astro:assets";
 import image1 from "@src/images/blog-1-1.jpeg";
 import CompactLayout from "@src/layouts/compact.astro";
 
-const code = `async function render(current: string) {
+const code1 = `async function render(current: string) {
     const next = update(current); // 次のフレームを計算
     element.innerText = updated;
 
@@ -15,6 +15,8 @@ const code = `async function render(current: string) {
     await sleep(10);
     await render(updated);
 }`;
+
+const code2 = `font-size: min(calc(100vw / 200 * 1.5), calc(80vh / 60), 0.7rem);`;
 ---
 
 <CompactLayout title="公式サイトを作りました！">
@@ -31,8 +33,10 @@ const code = `async function render(current: string) {
         ウェブ開発に触れるサークルは公式サイトを作りべきだと思ってます。ただ実際公式サイトがあるサークルが意外と少なかったのでこれからもっと増えていってほしいです。
     </p>
     <p>
-        このサイトは <a href="https://astro.build">Astro</a> で作った静的サイトです。昔から Astro を使っていますが、やっぱり使いやすい。生成された
-        HTML は <a href="https://workers.cloudflare.com">Cloudflare Workers</a> で Static Assets としてデプロイしています。
+        このサイトは <a href="https://astro.build">Astro</a> で作った静的サイトです。昔から
+        Astro を使っていますが、やっぱり使いやすい。生成された HTML は <a
+            href="https://workers.cloudflare.com">Cloudflare Workers</a
+        > で Static Assets としてデプロイしています。
     </p>
     <p>
         僕はバックエンドをメインにやってるのでそんなに CSS
@@ -40,24 +44,20 @@ const code = `async function render(current: string) {
         「GDGoC Chuo」の ASCII
         アートとアニメーションを加えました。（実はアニメーションのパターンが複数あります！）
     </p>
-    <assets.Image
-        src={image1}
-        alt="ASCII アートのもととなった3Dレンダー"
-    />
+    <assets.Image src={image1} alt="ASCII アートのもととなった3Dレンダー" />
     <p>アニメーションは DOM とテキストだけでやっています。</p>
     <p>
         まず Blender でいい感じの 3D テキストを作って、怪しいサイトで画像を
         ASCII アートに変換しました。あとは初期値の無の文字列を ASCII
         アートの文字列になるまで文字を変えていくだけです。
     </p>
-    <pre><code>{code}</code></pre><p>
+    <pre><code>{code1}</code></pre>
+    <p>
         これでも悪くないパフォーマンスなのでブラウザーと JavaScript
         ってすごい。HTML と CSS
         使っているだけなので簡単にレスポンシブなデザインにできました。<code
             >calc()</code
         > などを使ってページの大きさに合わせてフォントサイズを設定しています。
     </p>
-    <pre><code>font-size: min(calc(100vw / 200 * 1.5), calc(80vh / 60), 0.7rem);
-</code></pre>
-    <p>これからもブログ記事を増やす予定なのでよろしくお願いします。</p>
+    <pre><code>{code2}</code></pre>
 </CompactLayout>
