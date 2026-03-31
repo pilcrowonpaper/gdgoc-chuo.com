@@ -16,10 +16,10 @@ interface Props {
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
 
-        <title>GDGoC Chuo University</title>
+        <title>{Astro.props.title}</title>
 
         <!-- OpenGraph tags -->
-        <meta property="og:title" content="GDGoC Chuo University" />
+        <meta property="og:title" content={Astro.props.title} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en" />
         <meta property="og:site_name" content="GDGoC Chuo University" />
@@ -31,7 +31,7 @@ interface Props {
 
         <!-- Twitter tags -->
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="GDGoC Chuo University" />
+        <meta name="twitter:title" content={Astro.props.title} />
 
         <meta
             name="theme-color"
