@@ -20,8 +20,6 @@ jobs:
               run: npm i -g pnpm
             - name: Install wrangler
               run: npm i -g wrangler
-            - name: "Set"
-              run: pnpm approve-builds esbuild sharp workerd
             - name: Install dependencies
               run: pnpm install
             - name: Build
