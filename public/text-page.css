@@ -1,0 +1,11 @@
+@import "/base.css";
+@import "/text-content.css";
+
+main {
+	padding: 3rem 1rem 0 1rem;
+}
+
+#main-inner {
+	max-width: 50rem;
+	margin: auto;
+}

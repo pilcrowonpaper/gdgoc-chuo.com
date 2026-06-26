@@ -1,0 +1,60 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	font-weight: normal;
+	color: inherit;
+	background: none;
+	border: none;
+	background-color: transparent;
+	appearance: none;
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+html {
+	font-family: "SF Mono", "Operator Mono", "Roboto Mono", "Menlo", "Monaco", "Consolas", monospace;
+	font-size: 1rem;
+	--accent-color: #cf0100;
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		--accent-color: #ff8181;
+		background-color: #0e0e0e;
+		color: #eaeaea;
+	}
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+header {
+	padding: 1rem;
+	border-bottom: solid 1px var(--accent-color);
+}
+
+#header-inner {
+	max-width: 50rem;
+	margin: auto;
+}
+
+#header-home-link {
+	color: var(--accent-color);
+	line-height: 1;
+}
+
+main {
+	margin-bottom: 6rem;
+}

@@ -1,0 +1,88 @@
+<head>
+	<title>公式サイトを作りました！</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="icon" type="image/jpeg" href="https://gdgoc-chuo.com/gdg.jpeg">
+
+	<meta property="og:title" content="公式サイトを作りました！">
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="ja_JP">
+	<meta property="og:site_name" content="GDGoC Chuo University">
+	<meta property="og:url" content="https://gdgoc-chuo.com/blog/1">
+	<meta property="og:image" content="https://gdgoc-chuo.com/gdg.jpeg">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@gdgs_chuo">
+
+	<link rel="stylesheet" href="/text-page.css">
+</head>
+
+<body>
+	<header>
+		<div id="header-inner">
+			<a id="header-home-link" href="/">GDGoC Chuo University</a>
+		</div>
+	</header>
+	<main>
+		<div id="main-inner" class="text-content">
+			<h1>公式サイトを作りました！</h1>
+			<p>
+				GDGoC Chuo University
+				の公式サイトを作りました！サイト自体は去年の11月頃からありましたがやっとブログを追加しました。すでに記事が4つ公開されています。
+			</p>
+			<p>
+				GDGoC Chuo University
+				はウェブやモバイルアプリの開発を中心に活動している中央大学のサークルです。このサイトではメンバーが書いたブログ記事の公開とプロジェクトの紹介を行っています。
+			</p>
+			<p>
+				ウェブ開発に触れるサークルは公式サイトを作りべきだと思ってます。ただ実際公式サイトがあるサークルが意外と少なかったのでこれからもっと増えていってほしいです。
+			</p>
+			<p>
+				このサイトは
+				<a href="https://astro.build">Astro</a>
+				で作った静的サイトです。昔から Astro を使っていますが、やっぱり使いやすい。生成された HTML
+				は
+				<a href="https://workers.cloudflare.com">Cloudflare Workers</a>
+				で Static Assets としてデプロイしています。
+			</p>
+			<p>
+				僕はバックエンドをメインにやってるのでそんなに CSS
+				とかアニメーションを使いたいと思わないのですが、かっこいい「何か」が欲しかったのででっかい
+				「GDGoC Chuo」の ASCII
+				アートとアニメーションを加えました。（実はアニメーションのパターンが複数あります！）
+			</p>
+			<p>アニメーションは DOM とテキストだけでやっています。</p>
+			<p>
+				まず Blender でいい感じの 3D テキストを作って、怪しいサイトで画像を ASCII
+				アートに変換しました。
+			</p>
+			<img
+				src="/blog/1/render.jpeg"
+				alt="ASCII アートのもととなった3Dレンダー"
+				width="1280"
+				height="1280"
+			>
+			<p>あとは初期値の無の文字列を ASCII アートの文字列になるまで文字を変えていくだけです。</p>
+			<pre><code>async function render(current: string) {
+	const next = update(current); // 次のフレームを計算
+	element.innerText = updated;
+
+	if (next === target) {
+    	// 完成
+    	return
+    }
+	await sleep(10);
+	await render(updated);
+}</code></pre>
+			<p>
+				これでも悪くないパフォーマンスなのでブラウザーと JavaScript ってすごい。HTML と CSS
+				使っているだけなので簡単にレスポンシブなデザインにできました。
+				<code>calc()</code>
+				などを使ってページの大きさに合わせてフォントサイズを設定しています。
+			</p>
+			<pre><code>font-size: min(calc(100vw / 200 * 1.5), calc(80vh / 60), 0.7rem);</code></pre>
+		</div>
+	</main>
+</body>

@@ -1,0 +1,220 @@
+.text-content h1 {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 2rem;
+}
+
+.text-content h2 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-top: 2.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.text-content h3 {
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin-top: 2rem;
+	margin-bottom: 1.5rem;
+}
+
+.text-content h4 {
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+@media (max-width: 40rem) {
+	.text-content h1 {
+		font-size: 1.8rem;
+	}
+
+	.text-content h2 {
+		font-size: 1.4rem;
+	}
+}
+
+.text-content p {
+	line-height: 1.5;
+	margin-bottom: 1.5rem;
+}
+
+.text-content pre {
+	background-color: #f4f4f4;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	overflow: auto;
+	tab-size: 4;
+}
+
+@media (prefers-color-scheme: dark) {
+	.text-content pre {
+		background-color: #1c1c1c;
+	}
+}
+
+.text-content p a,
+.text-content ul a,
+.text-content ol a,
+.text-content table a,
+.text-content blockquote a {
+	color: var(--accent-color);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.text-content p strong,
+.text-content ul strong,
+.text-content ol strong,
+.text-content table strong {
+	font-weight: 600;
+}
+
+.text-content p em,
+.text-content ul em,
+.text-content ol em,
+.text-content table em {
+	font-style: italic;
+}
+
+.text-content ul,
+.text-content ol {
+	line-height: 1.5;
+	margin-bottom: 1.5rem;
+}
+
+.text-content ul li {
+	list-style: disc inside;
+	margin-bottom: 0.2rem;
+}
+
+.text-content ol li {
+	list-style: decimal inside;
+	margin-bottom: 0.2rem;
+}
+
+.text-content li:last-child {
+	margin-bottom: 0;
+}
+
+.text-content code {
+	font-family: monospace;
+}
+
+.text-content blockquote {
+	background-color: #f4f4f4;
+	color: #3c3c3c;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.text-content blockquote > *:last-child {
+	margin-bottom: 0;
+}
+
+.text-content blockquote > footer {
+	font-size: 0.85rem;
+	font-style: italic;
+}
+
+.text-content .table-wrapper {
+	width: 100%;
+	overflow: auto;
+	padding-bottom: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.text-content table {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+	white-space: nowrap;
+}
+
+.text-content table caption {
+	font-size: 0.85rem;
+	margin-top: 0.5rem;
+	text-align: left;
+	font-style: italic;
+	caption-side: bottom;
+	width: 0;
+	min-width: 100%;
+	white-space: normal;
+	color: #3c3c3c;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+.text-content thead {
+	background-color: #f4f4f4;
+}
+
+.text-content thead th {
+	padding: 0.5rem 0.5rem;
+	font-size: 0.85rem;
+}
+
+.text-content thead th:first-child {
+	padding-left: 1rem;
+}
+
+.text-content thead th:last-child {
+	padding-right: 1rem;
+}
+
+.text-content tbody tr {
+	border-bottom: solid 1px #cccccc;
+}
+
+.text-content tbody tr:last-child {
+	border-bottom: none;
+}
+
+.text-content tbody td {
+	padding: 0.85rem 0.5rem;
+}
+
+.text-content tbody td:first-child {
+	padding-left: 1rem;
+}
+
+.text-content tbody td:last-child {
+	padding-right: 1rem;
+}
+
+.text-content img {
+	max-height: 100vh;
+	height: auto;
+	width: auto;
+	object-fit: contain;
+	margin: 0 auto 1.5rem;
+	background-color: #eeeeee;
+}
+
+@media (prefers-color-scheme: dark) {
+	.text-content img {
+		background-color: rgb(62, 62, 62);
+	}
+}
+
+.text-content figure > img {
+	margin: auto;
+	margin-bottom: 0.5rem;
+}
+
+.text-content figure {
+	margin-bottom: 1.5rem;
+}
+
+.text-content figcaption {
+	font-size: 0.85rem;
+	color: #888888;
+	font-style: italic;
+}
+
+.text-content figcaption a {
+	text-decoration: underline;
+	text-decoration-color: inherit;
+	cursor: pointer;
+}

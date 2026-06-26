@@ -1,0 +1,431 @@
+<head>
+	<title>GDGoC Chuo University</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="icon" type="image/jpeg" href="https://gdgoc-chuo.com/gdg.jpeg">
+
+	<meta property="og:title" content="GDGoC Chuo University">
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="ja_JP">
+	<meta property="og:site_name" content="GDGoC Chuo University">
+	<meta property="og:url" content="https://gdgoc-chuo.com">
+	<meta property="og:image" content="https://gdgoc-chuo.com/gdg.jpeg">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@gdgs_chuo">
+
+	<link rel="stylesheet" href="/base.css">
+	<link rel="stylesheet" href="/text-content.css">
+	<style>
+	#card {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-bottom: solid 1px var(--accent-color);
+		padding: 4rem 0;
+	}
+
+	#art {
+		font-size: min(calc(100vw / 200 * 1.5), calc(80vh / 60), 0.7rem);
+		line-height: 1;
+		color: var(--accent-color);
+		user-select: none;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		#art {
+			color: var(--accent-color);
+		}
+	}
+
+	.link {
+		color: var(--accent-color);
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
+	#card-header {
+		padding: 1rem 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	@media (max-width: 40rem) {
+		#card-header {
+			padding: 1rem;
+			flex-direction: column;
+			align-items: start;
+			justify-content: left;
+			gap: 1rem;
+		}
+	}
+
+	#about {
+		padding: 2rem 1rem 3rem 1rem;
+	}
+
+	#about-inner {
+		max-width: 50rem;
+		margin: auto;
+	}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div id="header-inner">
+			<a id="header-home-link" href="/">GDGoC Chuo University</a>
+		</div>
+	</header>
+	<main>
+		<div id="card">
+			<pre id="art" aria-hidden="true"></pre>
+		</div>
+		<div id="about">
+			<div id="about-inner" class="text-content">
+				<h1>Google Developer Groups on Campus Chuo University</h1>
+				<p>
+					<a href="https://gdg.community.dev/">Google Developer Groups on Campus（GDGoC）</a>
+					は、Google Developers
+					のサポートを受けて運営される、大学単位の技術系学生コミュニティです。110か国以上、1200
+					以上の拠点があります。このコミュニティは、テクノロジーに興味を持つ人のためのコミュニティです。
+				</p>
+				<p>
+					その中でも GDGoC Chuo
+					University　は、中央大学を拠点に活動するコミュニティとして、「テクノロジーの力で身近な課題を解決する」「技術力を向上させる」ことを目指しています。サークル活動の一環として勉強会を開催したり、メンバーが個人またはチームでウェブサイトやモバイルアプリの開発に取り組んでいます。
+				</p>
+				<p>
+					現在は中央大学市ヶ谷田町キャンパス、後楽園キャンパス、茗荷谷キャンパス、多摩キャンパスで活動しています。
+				</p>
+				<h2>リンク</h2>
+				<ul>
+					<li>
+						<a href="/projects">プロジェクト紹介</a>
+					</li>
+					<li><a href="/blog">ブログ</a></li>
+					<li>
+						<a href="https://x.com/gdgs_chuo">X/Twitter</a>
+					</li>
+					<li>
+						<a href="https://www.instagram.com/gdgs_chuo">Instagram</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</main>
+</body>
+
+<script>
+"use strict";
+
+const artElementId = "art";
+
+start();
+
+async function start() {
+	const response = await fetch("/art.txt");
+	const art = await response.text();
+
+	const patternRand = Math.random();
+	if (patternRand >= 0.75) {
+		await runPattern1(art);
+	} else if (patternRand >= 0.5) {
+		await runPattern2(art);
+	} else if (patternRand >= 0.25) {
+		await runPattern3(art);
+	} else {
+		await runPattern4(art);
+	}
+}
+
+async function runPattern1(art) {
+	const artElement = document.getElementById(artElementId);
+	if (!(artElement instanceof HTMLPreElement)) {
+		throw new Error(`'${artElementId}' not a pre element`);
+	}
+	const uniqueChars = [];
+	for (let i = 0; i < art.length; i++) {
+		if (!uniqueChars.includes(art[i]) && art[i] !== "\n") {
+			uniqueChars.push(art[i]);
+		}
+	}
+	let currentState = "";
+	for (let i = 0; i < art.length; i++) {
+		if (art[i] !== "\n") {
+			currentState += " ";
+		} else {
+			currentState += "\n";
+		}
+	}
+	let timePassed = 0;
+	while (currentState !== art) {
+		let nextState = "";
+		for (let i = 0; i < art.length; i++) {
+			if (currentState[i] !== art[i]) {
+				if (currentState[i] === " ") {
+					if (Math.random() < 0.05) {
+						nextState += uniqueChars[Math.floor(Math.random() * uniqueChars.length)];
+					} else {
+						nextState += " ";
+					}
+				} else {
+					if (timePassed > 3000 && Math.random() < 0.2) {
+						nextState += art[i];
+					} else {
+						nextState += uniqueChars[Math.floor(Math.random() * uniqueChars.length)];
+					}
+				}
+			} else {
+				nextState += currentState[i];
+			}
+		}
+		artElement.innerText = nextState;
+		currentState = nextState;
+		await wait(50);
+		timePassed += 50;
+	}
+}
+
+async function runPattern2(art) {
+	const artElement = document.getElementById(artElementId);
+	if (!(artElement instanceof HTMLPreElement)) {
+		throw new Error(`'${artElementId}' not a pre element`);
+	}
+	const uniqueChars = [];
+	for (let i = 0; i < art.length; i++) {
+		if (!uniqueChars.includes(art[i]) && art[i] !== "\n") {
+			uniqueChars.push(art[i]);
+		}
+	}
+	let currentState = "";
+	for (let i = 0; i < art.length; i++) {
+		if (art[i] !== "\n") {
+			currentState += " ";
+		} else {
+			currentState += "\n";
+		}
+	}
+
+	const loop = ["|", "/", "-", "\\"];
+	let timePassed = 0;
+	while (currentState !== art) {
+		let nextState = "";
+		for (let i = 0; i < art.length; i++) {
+			if (currentState[i] === "\n") {
+				nextState += "\n";
+			} else if (loop.includes(currentState[i])) {
+				const rand = Math.random();
+				let chance;
+				if (timePassed > 3000) {
+					chance = 0.2;
+				} else if (timePassed > 2000) {
+					chance = 0.15;
+				} else {
+					chance = 0.1;
+				}
+				if (rand < chance) {
+					nextState += art[i];
+				} else {
+					const nextLoopIndex = (loop.indexOf(currentState[i]) + 1) % loop.length;
+					nextState += loop[nextLoopIndex];
+				}
+			} else if (currentState[i] !== art[i]) {
+				const rand = Math.random();
+				let chance;
+				if (timePassed > 3000) {
+					chance = 0.05;
+				} else if (timePassed > 1000) {
+					chance = 0.02;
+				} else if (timePassed > 500) {
+					chance = 0.01;
+				} else {
+					chance = 0.005;
+				}
+				if (rand < chance) {
+					nextState += loop[0];
+				} else {
+					nextState += currentState[i];
+				}
+			} else {
+				nextState += currentState[i];
+			}
+		}
+		artElement.innerText = nextState;
+		currentState = nextState;
+		await wait(50);
+		timePassed += 50;
+	}
+}
+
+async function runPattern3(art) {
+	const artElement = document.getElementById(artElementId);
+	if (!(artElement instanceof HTMLPreElement)) {
+		throw new Error(`'${artElementId}' not a pre element`);
+	}
+	const uniqueChars = [];
+	for (let i = 0; i < art.length; i++) {
+		if (!uniqueChars.includes(art[i]) && art[i] !== "\n") {
+			uniqueChars.push(art[i]);
+		}
+	}
+	let currentState = "";
+	for (let i = 0; i < art.length; i++) {
+		if (art[i] !== "\n") {
+			currentState += " ";
+		} else {
+			currentState += "\n";
+		}
+	}
+
+	const chars = [
+		" ",
+		".",
+		"'",
+		",",
+		";",
+		":",
+		"c",
+		"l",
+		"o",
+		"d",
+		"x",
+		"k",
+		"O",
+		"0",
+		"K",
+		"X",
+		"N",
+		"W",
+	];
+	let timePassed = 0;
+	while (currentState !== art) {
+		let nextState = "";
+		for (let i = 0; i < art.length; i++) {
+			if (currentState[i] === "\n") {
+				nextState += "\n";
+			} else if (currentState[i] !== art[i]) {
+				const charIndex = chars.indexOf(currentState[i]);
+				const rand = Math.random();
+				let chance;
+				if (timePassed > 3000) {
+					chance = 0.2;
+				} else if (timePassed > 2000) {
+					chance = 0.1;
+				} else if (timePassed > 1000) {
+					chance = 0.05;
+				} else {
+					chance = 0.01;
+				}
+				if (rand < chance) {
+					nextState += chars[charIndex + 1];
+				} else {
+					nextState += currentState[i];
+				}
+			} else {
+				nextState += currentState[i];
+			}
+		}
+		artElement.innerText = nextState;
+		currentState = nextState;
+		await wait(50);
+		timePassed += 50;
+	}
+}
+
+async function runPattern4(art) {
+	const artElement = document.getElementById(artElementId);
+	if (!(artElement instanceof HTMLPreElement)) {
+		throw new Error(`'${artElementId}' not a pre element`);
+	}
+	const uniqueChars = [];
+	for (let i = 0; i < art.length; i++) {
+		if (!uniqueChars.includes(art[i]) && art[i] !== "\n" && art[i] !== " ") {
+			uniqueChars.push(art[i]);
+		}
+	}
+	let currentState = "";
+	for (let i = 0; i < art.length; i++) {
+		if (art[i] !== "\n") {
+			currentState += " ";
+		} else {
+			currentState += "\n";
+		}
+	}
+
+	let timePassed = 0;
+	while (currentState !== art) {
+		let nextState = "";
+		for (let i = 0; i < art.length; i++) {
+			if (currentState[i] === "\n") {
+				nextState += "\n";
+			} else if (currentState[i] !== art[i]) {
+				if (currentState[i] === " ") {
+					const topIndexMaybe = i - 201;
+					const bottomIndexMaybe = i + 201;
+					const leftIndexMaybe = i - 1;
+					const rightIndexMaybe = i + 1;
+
+					let chance = 0.001;
+					if (
+						topIndexMaybe >= 0 &&
+						topIndexMaybe < art.length &&
+						currentState[topIndexMaybe] !== " " &&
+						currentState[topIndexMaybe] !== "\n"
+					) {
+						chance += 0.1;
+					}
+					if (
+						bottomIndexMaybe >= 0 &&
+						bottomIndexMaybe < art.length &&
+						currentState[bottomIndexMaybe] !== " " &&
+						currentState[bottomIndexMaybe] !== "\n"
+					) {
+						chance += 0.1;
+					}
+					if (
+						leftIndexMaybe >= 0 &&
+						leftIndexMaybe < art.length &&
+						currentState[leftIndexMaybe] !== " " &&
+						currentState[leftIndexMaybe] !== "\n"
+					) {
+						chance += 0.1;
+					}
+					if (
+						rightIndexMaybe >= 0 &&
+						rightIndexMaybe < art.length &&
+						currentState[rightIndexMaybe] !== " " &&
+						currentState[rightIndexMaybe] !== "\n"
+					) {
+						chance += 0.1;
+					}
+					if (Math.random() < chance) {
+						nextState += uniqueChars[Math.floor(Math.random() * uniqueChars.length)];
+					} else {
+						nextState += currentState[i];
+					}
+				} else {
+					if (Math.random() < 0.2) {
+						nextState += art[i];
+					} else {
+						nextState += uniqueChars[Math.floor(Math.random() * uniqueChars.length)];
+					}
+				}
+			} else {
+				nextState += currentState[i];
+			}
+		}
+		artElement.innerText = nextState;
+		currentState = nextState;
+		await wait(50);
+		timePassed += 50;
+	}
+}
+
+async function wait(ms) {
+	return new Promise((r) => setTimeout(r, ms));
+}
+</script>
