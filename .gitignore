@@ -1,6 +1,3 @@
-.idea
-node_modules
-.astro
-dist
-.wrangler
-.DS_Store
+.*
+!.github
+!.gitignore
