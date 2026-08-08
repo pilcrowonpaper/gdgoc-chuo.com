@@ -1,6 +1,5 @@
 .idea
 node_modules
-node_modules
 .astro
 dist
 .wrangler
